@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="CSS/Calculadora.css">
+	<title>Calculadora</title>
+	<meta charset="utf-8">
+</head>
+
+<body>
+<div id="t1">
+<table>
+<tr>
+	<td><input id="ni" type="number" name="Numeros"></td>
+</tr>
+</table>
+</div>
+<table id="t2">
+<tr>
+	<td><button>MC</button></td>
+	<td><button>MR</button></td>
+	<td><button>MS</button></td>
+	<td><button>M+</button></td>
+	<td><button>M-</button></td>
+</tr>
+<tr>
+	<td><button onclick="numb('')"><-</button></td>
+	<td><button>CE</button></td>
+	<td><button>C</button></td>
+	<td><button onclick="numpn()">±</button></td>
+	<td><button>Raíz</button></td>
+</tr>
+<tr>
+	<td><button onclick="num('7')" value="7">7</button></td>
+	<td><button onclick="num('8')" value="8">8</button></td>
+	<td><button onclick="num('9')" value="9">9</button></td>
+	<td><button onclick="division()">/</button></td>
+	<td><button>%</button></td>
+</tr>
+<tr>
+	<td><button onclick="num('4')" value="4">4</button></td>
+	<td><button onclick="num('5')" value="5">5</button></td>
+	<td><button onclick="num('6')" value="6">6</button></td>
+	<td><button onclick="multi()">*</button></td>
+	<td><button>1/x</button></td>
+</tr>
+<tr>
+	<td><button onclick="num('1')" value="1">1</button></td>
+	<td><button onclick="num('2')" value="2">2</button></td>
+	<td><button onclick="num('3')" value="3">3</button></td>
+	<td><button onclick="resta()">-</button></td>
+	<td><button class="igual" onclick="resultado()">= </button></td>
+</tr>
+<tr>
+	<td><button onclick="num('0')">0</button></td>
+	<td><button>,</button></td>
+	<td><button  onclick="suma()">+</button></td>
+</tr>
+</table>
+</table>
+
+
+<script type="text/javascript">
+
+class operacion{
+	constructor(_numero1,_numero2){
+		//Esta función almacena los valores
+		this.numero1 = _numero1;
+		this.numero2 = _numero2;
+	}
+sumarajax()
+   {
+   	  var objetoaenviar=this;
+   	  //Return a new promise.
+   	  return new Promise(function(resolve, reject){
+   	  	// Do the usual XHR stuff
+
+   	  	try{
+   	  		 var xhr = new XMLHttpRequest();
+   	  		xhr.open('POST', 'http://localhost:8080/Asumar'); 
+   	  		xhr.setRequestHeader('Content-Type', 'application/json'); 
+   	  		xhr.onload = function() {
+   	  			if (xhr.status === 200){
+   	  				resolve(JSON.parse(xhr.responseText));
+   	  			}
+   	  			else
+   	  			{
+   	  				reject(xhr);
+   	  			}
+   	  		};
+   	  		xhr.send(JSON.stringify(objetoaenviar));
+
+
+   	  	}
+   	  	catch(err){
+   	  		reject(err.message);
+   	  	}
+   	  });
+   
+   }
+    restarajax()
+   {
+   	  var objetoaenviar=this;
+   	  //Return a new promise.
+   	  return new Promise(function(resolve, reject){
+   	  	// Do the usual XHR stuff
+
+   	  	try{
+   	  		 var xhr = new XMLHttpRequest();
+   	  		xhr.open('POST', 'http://localhost:8080/Arestar'); 
+   	  		xhr.setRequestHeader('Content-Type', 'application/json'); 
+   	  		xhr.onload = function() {
+   	  			if (xhr.status === 200){
+   	  				resolve(JSON.parse(xhr.responseText));
+   	  			}
+   	  			else
+   	  			{
+   	  				reject(xhr);
+   	  			}
+   	  		};
+   	  		xhr.send(JSON.stringify(objetoaenviar));
+
+
+   	  	}
+   	  	catch(err){
+   	  		reject(err.message);
+   	  	}
+   	  });
+   
+   }
+    multiplicarajax()
+   {
+   	  var objetoaenviar=this;
+   	  //Return a new promise.
+   	  return new Promise(function(resolve, reject){
+   	  	// Do the usual XHR stuff
+
+   	  	try{
+   	  		 var xhr = new XMLHttpRequest();
+   	  		xhr.open('POST', 'http://localhost:8080/Amultiplicar'); 
+   	  		xhr.setRequestHeader('Content-Type', 'application/json'); 
+   	  		xhr.onload = function() {
+   	  			if (xhr.status === 200){
+   	  				resolve(JSON.parse(xhr.responseText));
+   	  			}
+   	  			else
+   	  			{
+   	  				reject(xhr);
+   	  			}
+   	  		};
+   	  		xhr.send(JSON.stringify(objetoaenviar));
+
+
+   	  	}
+   	  	catch(err){
+   	  		reject(err.message);
+   	  	}
+   	  });
+   
+   }
+     dividirajax()
+   {
+   	  var objetoaenviar=this;
+   	  //Return a new promise.
+   	  return new Promise(function(resolve, reject){
+   	  	// Do the usual XHR stuff
+
+   	  	try{
+   	  		 var xhr = new XMLHttpRequest();
+   	  		xhr.open('POST', 'http://localhost:8080/Adividir'); 
+   	  		xhr.setRequestHeader('Content-Type', 'application/json'); 
+   	  		xhr.onload = function() {
+   	  			if (xhr.status === 200){
+   	  				resolve(JSON.parse(xhr.responseText));
+   	  			}
+   	  			else
+   	  			{
+   	  				reject(xhr);
+   	  			}
+   	  		};
+   	  		xhr.send(JSON.stringify(objetoaenviar));
+
+
+   	  	}
+   	  	catch(err){
+   	  		reject(err.message);
+   	  	}
+   	  });
+   
+   }
+   }
+
+
+let numero1 = 0;
+let tipodesigno = '';
+let numero2 = 0;
+
+
+	function num(numero){
+document.getElementById("ni").value = document.getElementById("ni").value + numero;	
+	}
+	function numpn(numero){
+	document.getElementById("ni").value = document.getElementById("ni").value + numero*-1;	
+	}
+	function numb(){
+document.getElementById("ni").value = "";
+	}
+
+	function suma(){
+numero1 = parseInt(document.getElementById("ni").value);
+		tipodesigno = '+';
+		document.getElementById("ni").value= "";
+	}
+	function resta(){
+numero1 = parseInt(document.getElementById("ni").value);
+		tipodesigno = '-';
+		document.getElementById("ni").value= "";
+		
+	}
+	function multi(){
+numero1 = parseInt(document.getElementById("ni").value);
+		tipodesigno = '*';
+		document.getElementById("ni").value= "";
+		
+	}
+	function division(){
+numero1 = parseInt(document.getElementById("ni").value);
+		tipodesigno = '/';
+		document.getElementById("ni").value= "";
+		
+	}
+
+		function resultado(){
+numero2 = parseInt(document.getElementById("ni").value);
+
+let claseoperacioninstaciada = new operacion(numero1,numero2);
+
+		switch(tipodesigno) {
+  case '+':
+    document.getElementById("ni").value = claseoperacioninstaciada.sumarajax().then(function(response){
+    	document.getElementById("ni").value=response;
+    },function(error){
+    	document.getElementById("ni").value="Hizo algo mal";
+    });
+    break;
+  case '-':
+    document.getElementById("ni").value = claseoperacioninstaciada.restarajax().then(function(response){
+    	document.getElementById("ni").value=response;
+    },function(error){
+    	document.getElementById("ni").value="Hizo algo mal";
+    });
+    break;
+  case '*':
+  	document.getElementById("ni").value = claseoperacioninstaciada.multiplicarajax().then(function(response){
+    	document.getElementById("ni").value=response;
+    },function(error){
+    	document.getElementById("ni").value="Hizo algo mal";
+    });
+  	break;
+  case '/':
+  	document.getElementById("ni").value = claseoperacioninstaciada.dividirajax().then(function(response){
+    	document.getElementById("ni").value=response;
+    },function(error){
+    	document.getElementById("ni").value="Hizo algo mal";
+    });
+  	break;
+}
+	}
+</script>
+</body>
+</html>
